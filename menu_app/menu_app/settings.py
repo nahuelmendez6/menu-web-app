@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'accounts',
+    'local_management',
 ]
 
 MIDDLEWARE = [
@@ -78,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME':'menu_app',
         'USER':'root',
-        'PASSWORD':'nM1258menMA',
+        'PASSWORD':'nM1258menMa',
         'HOST':'localhost',
         'PORT':'3306',
     }
