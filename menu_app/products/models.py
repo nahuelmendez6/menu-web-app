@@ -12,7 +12,7 @@ STATUS_CHOICES = (
 # Create your models here.
 class Category(models.Model):
     category_name = models.CharField(max_length=100)
-    category_description = models.TextField(max_length=500)
+    category_description = models.TextField(max_length=500, blank=True, null=True)
     status = models.TextField(max_length=20, choices=STATUS_CHOICES, default='Active')
     local_owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=timezone.now, editable=False)

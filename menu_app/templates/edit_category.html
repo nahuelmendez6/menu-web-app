@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{%  load static  %}
 {% block content %}
 
     <form id="addCategoryForm" class="form-container" action="{% url 'add_category' %}" method="POST">
@@ -7,7 +6,7 @@
         {{ form }}
 
         <button type="submit">
-            Agregar categoria
+            Editar categoria
         </button>
     </form>
 

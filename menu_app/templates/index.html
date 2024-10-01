@@ -10,8 +10,9 @@
             <li><a>Editar menu</a></li>
             <li>Ver carta</li>
             <li><a href="{% url 'add_category' %}">Agregar categoria</a></li>
-            <li><a href="#">Ver categorías</a></li>
-            <li><a href="#">Ver productos</a></li>
+            <li><a href="{% url 'show_categories' %}">Ver categorías</a></li>
+            <li><a href="{% url 'add_products' %}">Agregar productos</a></li>
+            <li><a href="{% url 'show_products' %}">Ver productos</a></li>
         </ul>
     {% endif %}
 

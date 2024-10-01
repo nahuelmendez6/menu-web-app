@@ -1,13 +1,12 @@
 {% extends 'base.html' %}
-{%  load static  %}
 {% block content %}
 
-    <form id="addCategoryForm" class="form-container" action="{% url 'add_category' %}" method="POST">
+    <form id="addProductForm" class="form-container" action="{% url 'add_products' %}" method="POST">
         {% csrf_token %}
         {{ form }}
 
         <button type="submit">
-            Agregar categoria
+            Agregar producto
         </button>
     </form>
 

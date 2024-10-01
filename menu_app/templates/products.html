@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{%  load static  %}
+{% block content %}
+    <h2>Productos</h2>
+    <table>
+        <tbody>
+            {% for prod in products %}
+                <tr>
+                    <td>{{ prod.id }}</td>
+                    <td>
+                        <div class="item-desc-1">
+                            <span>{{ prod }}</span>
+                        </div>
+                    </td>
+                    <td class="text-center">{{ prod.category }}</td>
+                    <td class="text-center">{{ prod.created_at }}</td>
+                    <td class="text-center">{{ prod.updated_at }}</td>
+                    <td class="text-center"><a href="#" class="text-body">Editar</a> &nbsp;&nbsp; <a href="#" class="text-body">Eliminar</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

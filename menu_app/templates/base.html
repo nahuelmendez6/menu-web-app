@@ -1,3 +1,4 @@
+{%  load static  %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carta Virtual - Inicio</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/imgs/theme/favicon.svg' %}" />
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
 </head>
 <body>
     <header>
@@ -15,12 +20,13 @@
         {% endif %}
         <nav>
             <ul>
+                <li><a href="{% url 'home' %}">Inicio</a></li>
                 {% if not user.is_authenticated %}
                     <li><a href="{% url 'register' %}">Registro</a></li>
                     <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
 
                 {% else %}
-                    <li><a href="productos.html">Ver Productos</a></li>
+                    <li><a href="{% url 'show_products' %}">Ver Productos</a></li>
                     <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
                 {% endif %}
             </ul>

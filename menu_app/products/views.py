@@ -1,12 +1,17 @@
+from importlib.resources import contents
+from itertools import product
+from unicodedata import category
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import Category, Products
-from .forms import CategoryForm
+from .forms import CategoryForm, ProductForm
 from django.db.models import Q
 
 
 # Create your views here.
+# ----------------------- VIEWS PARA MANEJAR CATEGORIAS ------------------------------------------------------
 @login_required
 def add_category(request):
     if request.method == 'POST':
@@ -24,5 +29,44 @@ def add_category(request):
     return render(request, 'add_category.html', context)
 
 
+def edit_category(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('show_categories')
+    form = CategoryForm()
+    context = {
+        'form':form,
+    }
+    return render(request, 'edit_category.html', context)
+
+
+def delete_category(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    category.delete()
+    return redirect('show_categories')
+
+
 def show_categories(request):
     return render(request, 'categories.html')
+
+# ----------------------- VIEWS PARA MANEJAR PRODUCTOS ------------------------------------------------------
+@login_required
+def add_products(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_product = form.save(commit=False)
+            new_product.local_owner = request.user
+            new_product.save()
+            return redirect('show_products')
+    form = ProductForm()
+    context = {
+        'form':form,
+    }
+    return render(request, 'add_products.html', context)
+
+
+def show_products(request):
+    return render(request, 'products.html')

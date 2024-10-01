@@ -10,3 +10,16 @@ class CategoryForm(forms.ModelForm):
             'category_description': 'Descripción',
             'category_featured_image': 'Imagen',
         }
+
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Products
+        fields = ('product_name', 'product_price', 'category', 'product_description', 'product_featured_image')
+        labels = {
+            'product_name':'Nombre',
+            'product_price': 'Precio',
+            'category': 'Categoría',
+            'product_description': 'Descripcion',
+            'product_featured_image': 'Imagen'
+        }
