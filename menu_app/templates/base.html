@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta Virtual - Inicio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        {% if not user.is_authenticated %}
+            <h1>Bienvenido a MenuApp</h1>
+        {% else %}
+            <h1>{{ user }}</h1>
+        {% endif %}
+        <nav>
+            <ul>
+                {% if not user.is_authenticated %}
+                    <li><a href="{% url 'register' %}">Registro</a></li>
+                    <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+
+                {% else %}
+                    <li><a href="productos.html">Ver Productos</a></li>
+                    <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+
+</body>
+</html>

@@ -1,10 +1,9 @@
-from email.headerregistry import Group
-
 from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 from .forms import RegistrationForm
-
+from django.contrib.auth.models import Group
+from django.contrib.auth import logout
 
 # Create your views here.
 def home(request):
@@ -18,14 +17,14 @@ def register(request):
             user = form.save()
             group = Group.objects.get(name='owners')
             group.user_set.add(user)
-            return redirect('home')
+            return redirect('login')
     else:
         form = RegistrationForm()
-        context = {
-            'form':form
-        }
+    context = {
+        'form':form
+    }
 
-        return render(request, 'register.html', context)
+    return render(request, 'register.html', context)
 
 
 def login(request):
@@ -39,7 +38,11 @@ def login(request):
             if user is not None:
                 auth.login(request, user)
             return redirect('home')
-        context = {
-            'form':form
-        }
-        return render(request, 'login.html', context)
+    context = {
+        'form':form
+    }
+    return render(request, 'login.html', context)
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')

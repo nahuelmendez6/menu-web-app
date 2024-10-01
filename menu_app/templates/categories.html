@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Categorias</h2>
+    <table>
+        <tbody>
+            {% for cat in categories %}
+                <tr>
+                    <td>{{ cat.id }}</td>
+                    <td>
+                        <div class="item-desc-1">
+                            <span>{{ cat }}</span>
+                        </div>
+                    </td>
+                    <td class="text-center">{{ cat.created_at }}</td>
+                    <td class="text-center">{{ cat.updated_at }}</td>
+                    <td class="text-center"><a href="#" class="text-body"><i class="fi-rs-edit"></i></a> &nbsp;&nbsp; <a href="#" class="text-body"><i class="fi-rs-trash"></i></a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

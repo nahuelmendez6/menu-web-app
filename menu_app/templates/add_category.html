@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <form id="addCategoryForm" class="form-container" action="{% url 'add_category' %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+
+        <button type="submit">
+            Agregar categoria
+        </button>
+    </form>
+
+{% endblock %}
