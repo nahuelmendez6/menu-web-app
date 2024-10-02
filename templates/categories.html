@@ -15,7 +15,7 @@
                     </td>
                     <td class="text-center">{{ cat.created_at }}</td>
                     <td class="text-center">{{ cat.updated_at }}</td>
-                    <td class="text-center"><a href="{% url 'edit_category' %}" class="text-body">Editar</a> &nbsp;&nbsp; <a href="{% url 'delete_category' %}" class="text-body">Eliminar</a></td>
+                    <td class="text-center"><a href="{% url 'edit_category' cat.id %}" class="text-body">Editar</a> &nbsp;&nbsp; <a href="{% url 'delete_category' cat.id %}" class="text-body">Eliminar</a></td>
                 </tr>
             {% endfor %}
         </tbody>

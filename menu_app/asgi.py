@@ -1,5 +1,5 @@
 """
-ASGI config for menu_app project.
+ASGI config for menu_appp project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

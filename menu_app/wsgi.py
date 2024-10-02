@@ -1,5 +1,5 @@
 """
-WSGI config for menu_app project.
+WSGI config for menu_appp project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

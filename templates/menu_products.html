@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+  <ul>
+    {% for cat in categories %}
+      <a href="#">{{ cat }}</a>
+    {% endfor %}
+  </ul>
+{% endblock %}

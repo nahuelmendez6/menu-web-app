@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Categorias</h2>
+    <table>
+        <tbody>
+            {% for cat in categories %}
+                <tr>
+                    <td>
+                        <div class="item-desc-1">
+                            <span>{{ cat }}</span>
+                        </div>
+                    </td>
+                    <td class="text-center">{{ cat.category_description }}</td>
+                    <td class="text-center"><a href="{% url 'menu_products' cat.id %}" class="text-body">Ver productos</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

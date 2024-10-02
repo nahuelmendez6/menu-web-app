@@ -29,15 +29,17 @@ def add_category(request):
     return render(request, 'add_category.html', context)
 
 
-def edit_category(request):
+def edit_category(request, pk):
+    category = get_object_or_404(Category, pk=pk)
     if request.method == 'POST':
-        form = CategoryForm(request.POST)
+        form = CategoryForm(request.POST, instance=category)
         if form.is_valid():
             form.save()
             return redirect('show_categories')
     form = CategoryForm()
     context = {
         'form':form,
+        'category':category
     }
     return render(request, 'edit_category.html', context)
 
@@ -66,6 +68,27 @@ def add_products(request):
         'form':form,
     }
     return render(request, 'add_products.html', context)
+
+
+def edit_product(request, pk):
+    product = get_object_or_404(Category, pk=pk)
+    if request.method == 'POST':
+        form = ProductForm(request.POST, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('show_products')
+    form = ProductForm()
+    context = {
+        'form':form,
+        'product':product
+    }
+    return render(request, 'edit_category.html', context)
+
+
+def delete_product(request, pk):
+    product = get_object_or_404(Products, pk=pk)
+    product.delete()
+    return redirect('show_products')
 
 
 def show_products(request):

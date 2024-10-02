@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'accounts',
     'local_management',
     'products',
+    'public_menu',
 ]
 
 MIDDLEWARE = [
