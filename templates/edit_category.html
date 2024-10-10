@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <form id="addCategoryForm" class="form-container" action="{% url 'add_category' %}" method="POST" enctype="multipart/form-data">
+    <form id="addCategoryForm" class="form-container" action="{% url 'edit_category' category.id %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
 

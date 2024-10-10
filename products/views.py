@@ -42,9 +42,12 @@ def edit_category(request, category_id):
             return redirect('show_categories')
         else:
             print(form.errors)  # Verifica qué errores hay en el formulario
-    else:
-        form = CategoryForm(instance=category)
-    return render(request, 'edit_category.html', {'form': form})
+    form = CategoryForm(instance=category)
+    context = {
+        'form':form,
+        'category':category
+    }
+    return render(request, 'edit_category.html', context)
 
 
 
