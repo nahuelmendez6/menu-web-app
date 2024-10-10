@@ -7,6 +7,9 @@
             {% for prod in products %}
                 <tr>
                     <td>{{ prod.id }}</td>
+                    {% if category.image %}
+                        <img src="{{ cat.product_featured_image.url }}" alt="{{ category.name }}">
+                    {% endif %}
                     <td>
                         <div class="item-desc-1">
                             <span>{{ prod }}</span>

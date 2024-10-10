@@ -1,8 +1,9 @@
 from importlib.resources import contents
 from itertools import product
 from unicodedata import category
-
+import pdb
 from django.contrib.auth.decorators import login_required
+from django.db.transaction import commit
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import Category, Products
@@ -13,40 +14,43 @@ from django.db.models import Q
 # Create your views here.
 # ----------------------- VIEWS PARA MANEJAR CATEGORIAS ------------------------------------------------------
 @login_required
+@login_required
 def add_category(request):
     if request.method == 'POST':
-        form = CategoryForm(request.POST, request.FILES)     # Instanciamos el formulario de Categoria
-        if form.is_valid():                 # Si el formulario se completo correctamente
+        form = CategoryForm(request.POST, request.FILES)
+        if form.is_valid():
             category = form.save(commit=False)
             category.local_owner = request.user
             category.save()
             return redirect('show_categories')
+        else:
+            print(form.errors)  # Para ver qué errores tiene el formulario
+    else:
+        form = CategoryForm()
+    return render(request, 'add_category.html', {'form': form})
 
-    form = CategoryForm()       # Si el formulario no se ha enviado, instanciamos para generarlo
-    context = {
-        'form': form,
-    }
-    return render(request, 'add_category.html', context)
 
-
-def edit_category(request, pk):
-    category = get_object_or_404(Category, pk=pk)
+@login_required
+def edit_category(request, category_id):
+    category = get_object_or_404(Category, pk=category_id)
     if request.method == 'POST':
-        form = CategoryForm(request.POST, instance=category)
+        form = CategoryForm(request.POST, request.FILES, instance=category)  # Asegúrate de pasar la instancia
         if form.is_valid():
             form.save()
+            #category.local_owner = request.user  # Asegúrate de asignar el propietario local
+            #category.save()
             return redirect('show_categories')
-    form = CategoryForm()
-    context = {
-        'form':form,
-        'category':category
-    }
-    return render(request, 'edit_category.html', context)
+        else:
+            print(form.errors)  # Verifica qué errores hay en el formulario
+    else:
+        form = CategoryForm(instance=category)
+    return render(request, 'edit_category.html', {'form': form})
 
 
-def delete_category(request, pk):
-    category = get_object_or_404(Category, pk=pk)
-    category.delete()
+
+def delete_category(request, category_id):
+    d_category = get_object_or_404(Category, pk=category_id)
+    d_category.delete()
     return redirect('show_categories')
 
 
@@ -82,7 +86,7 @@ def edit_product(request, pk):
         'form':form,
         'product':product
     }
-    return render(request, 'edit_category.html', context)
+    return render(request, 'edit_products.html', context)
 
 
 def delete_product(request, pk):

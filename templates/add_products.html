@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <form id="addProductForm" class="form-container" action="{% url 'add_products' %}" method="POST">
+    <form id="addProductForm" class="form-container" action="{% url 'add_products' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
 

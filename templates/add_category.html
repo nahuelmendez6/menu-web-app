@@ -2,7 +2,7 @@
 {%  load static  %}
 {% block content %}
 
-    <form id="addCategoryForm" class="form-container" action="{% url 'add_category' %}" method="POST">
+    <form id="addCategoryForm" class="form-container" action="{% url 'add_category' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
 

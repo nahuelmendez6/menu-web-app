@@ -19,6 +19,12 @@ class CategoryForm(forms.ModelForm):
         label='Hora de cierre'
     )
 
+    def clean_available_days(self):
+        days = self.cleaned_data.get('available_days')
+        if days:
+            return list(days)
+        return []
+
     class Meta:
         model = Category
         fields = ('category_name', 'category_description', 'category_featured_image', 'available_days',
