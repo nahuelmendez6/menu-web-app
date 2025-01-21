@@ -1,4 +1,4 @@
-from .models import Category, Products
+from .models import Category, Product
 
 
 def get_categories(request):
@@ -7,5 +7,5 @@ def get_categories(request):
 
 
 def get_products(request):
-    products = Products.objects.all()
+    products = Product.objects.all()
     return dict(products=products)

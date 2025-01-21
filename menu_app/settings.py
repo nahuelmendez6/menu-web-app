@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'local_management',
     'products',
     'public_menu',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [

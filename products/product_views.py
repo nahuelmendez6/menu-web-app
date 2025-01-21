@@ -1,11 +1,20 @@
 from django.http.response import JsonResponse
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, throttle_classes
 from rest_framework.parsers import JSONParser
 from rest_framework import status
+
 from .models import Product
 from .serializers import ProductSerializer
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import permission_classes
+from rest_framework.throttling import UserRateThrottle
+
+class CustomRateThrottle(UserRateThrottle):
+    rate = '100/day'    # 100 solicitudes por dia
 
 @api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+@throttle_classes([CustomRateThrottle])
 def product_list(request):
     if request.method == 'GET':
         products = Product.objects.all()    # Listamos todos los productos
@@ -28,6 +37,8 @@ def product_list(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+@throttle_classes([CustomRateThrottle])
 def product_detail(request, pk):
     try:
         product = Product.objects.get(pk=pk) # Verificamos si existe el producto
@@ -49,3 +60,7 @@ def product_detail(request, pk):
     elif request.method == 'DELETE':
         product.delete()
         return JsonResponse({'message':'El producto fue eliminado con exito.'}, status=status.HTTP_204_NO_CONTENT)
+
+
+class CustomRateThrottle(UserRateThrottle):
+    rate = '100/day'    # 100 solicitudes por dia
