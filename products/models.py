@@ -45,7 +45,7 @@ class AvailabilityMixin(models.Model):
 
 
 # Create your models here.
-class Category(models.Model, AvailabilityMixin):
+class Category(AvailabilityMixin):
     category_name = models.CharField(max_length=100)
     category_description = models.TextField(max_length=500, blank=True, null=True)
     is_active = models.BooleanField(default=True)
@@ -62,7 +62,7 @@ class Category(models.Model, AvailabilityMixin):
         return self.category_name
 
 
-class Product(models.Model, AvailabilityMixin):
+class Product(AvailabilityMixin):
     product_name = models.CharField(max_length=100)
     product_price = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal('0.00'))
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products') # category.products.all()

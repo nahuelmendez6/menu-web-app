@@ -3,7 +3,7 @@ from unicodedata import category
 
 from django.shortcuts import render, get_object_or_404
 
-from products.models import Products, Category
+from products.models import Product, Category
 
 
 # Create your views here.
